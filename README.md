@@ -4,27 +4,26 @@
 
 # Homebridge 3em Energy Meter
 
-[Homebridge 3em Energy Meter](https://www.npmjs.com/package/homebridge-3em-energy-meter) is a plugin for [Homebridge](https://github.com/homebridge/homebridge) that implements Shelly 3EM energy metering functionality in Homekit.
+homebridge_shelly_3em is a plugin for [Homebridge](https://github.com/homebridge/homebridge) that implements Shelly 3EM energy metering functionality in Homekit.
 
-This plugin uses http requests to a Shelly 3EM (or EM*) device, making it possible to retain the native Shelly cloud statistics (which use MQTT) and at the same time allow you to monitor your energy consumption via Homekit. 
+This plugin uses http requests to a Shelly 3EM device, making it possible to retain the native Shelly cloud statistics (which use MQTT) and at the same time allow you to monitor your energy consumption via Homekit. 
 
 Please note that due to the fact that Apple does not support energy characteristics in Homekit, this plugin's accessory will only show values in the third-party homekit application "EVE".
 
 [![Status](screenshots/homebridge-3em-energy-meter-eve-app.png)]
 
-It will show in the EVE application the following values: Voltage (the average voltage of all 3 phases), Current (the accumulated Ampere of all 3 phases), Consumption (the accumulated Watts of all 3 phases) and the Total Consumption (the accumulated kWh of all 3 phases as calculated by Shelly API. Note in order to reset this value you must reset it in the Shelly app). A Total Cost and Projected Cost will show if you have specified the Energy Cost in the settings section of your EVE application. Total Consumption and Total Cost will feature the fakegato-history graph.
+It will show in the EVE application the following values: Consumption and the Total Consumption. A Total Cost and Projected Cost will show if you have specified the Energy Cost in the settings section of your EVE application. Total Consumption and Total Cost will feature the fakegato-history graph.
 
-This application uses the cool fakegato plugin ([simont77/fakegato-history](https://github.com/simont77/fakegato-history)).
+This application uses the fakegato plugin ([simont77/fakegato-history](https://github.com/simont77/fakegato-history)).
 
-Please also note that the sole purpose of this plugin is the energy metering feature of the Shelly 3em in order to monitor your 3 phase installation. The Shelly 3em features also an actuator (switch) which is not implemented in this plugin. If you need to use the switch in Homekit please use other plugins, like for example the very good homebridge-shelly ([alexryd/homebridge-shelly](https://github.com/alexryd/homebridge-shelly)) plugin.
 
 # Installation Instructions
 
-You can easily install this plugin by using the superb [Homebridge Config UI X](https://www.npmjs.com/package/homebridge-config-ui-x). Search for "homebridge-3em-energy-meter" in the "Plugins" tab and install the plugin. After that fill out the configuration by using the "SETTINGS" link below the installed plugin.
+You can easily install this plugin by using the  [Homebridge Config UI X](https://www.npmjs.com/package/homebridge-config-ui-x). Search for "homebridge_shelly_3em" in the "Plugins" tab and install the plugin. After that fill out the configuration by using the "SETTINGS" link below the installed plugin.
 
 Alternatively, can you install the plugin by 
 
-             npm install -g homebridge-3em-energy-meter
+             npm install -g homebridge_shelly_3em
 
 and then edit your Homebridge's config.json to include the following in the accessories section:
 
