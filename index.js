@@ -10,7 +10,7 @@ module.exports = function (homebridge) {
 	Accessory = homebridge.platformAccessory;
 	UUIDGen = homebridge.hap.uuid;
 	FakeGatoHistoryService = require('fakegato-history')(homebridge);
-	homebridge.registerAccessory("homebridge-3em-energy-meter-adv", "3EMEnergyMeterAdv", EnergyMeter);
+	homebridge.registerAccessory("homebridge_shelly_3em", "shelly_3em", EnergyMeter);
 
 }
 
@@ -289,7 +289,7 @@ EnergyMeter.prototype.updateState = function () {
 //			if (value_ampere1 != null) {
 //				this.service.getCharacteristic(this._EveAmpere1).setValue(value_ampere1, undefined, undefined);
 //			}
-			if (this.powerConsumption > this.auto_on_Watt) {  // Si la consommation dépasse 20 kW
+			if (this.powerConsumption > this.auto_on_Watt) {  // Si la consommation dÃ©passe 20 kW
 				if (this.serviceSwitch.getCharacteristic(Characteristic.On).value===false) {
 					this.log.info("Switching switch to ON cause consumption = " + this.powerConsumption + " and prev state was " + this.serviceSwitch.getCharacteristic(Characteristic.On).value);
 					this.setPowerState(true, () => {});
