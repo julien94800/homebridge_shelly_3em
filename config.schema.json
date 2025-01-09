@@ -1,0 +1,119 @@
+{
+  "pluginAlias": "shelly_3em",
+  "pluginType": "accessory",
+  "singular": false,
+  "headerDisplay": "Shelly 3EM Energy Meter Plugin",
+  "footerDisplay": "This accessory will only be supported in the third-party Homekit app EVE.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "name": {
+        "title": "Name",
+        "type": "string",
+        "default": "First_Channel",
+        "required": true
+      },
+      "Channel": {
+        "title": "Which channel to output on this accessory",
+        "type": "string",
+        "oneOf": [
+          {
+            "title": "Channel A",
+            "enum": ["0"]
+          },
+          {
+            "title": "Channel B",
+            "enum": ["1"]
+          },
+          {
+            "title": "Channel C",
+            "enum": ["2"]
+          }
+        ],
+        "required": true,
+        "description": "It must be 0 , 1 or 2"
+      },
+      "ip": {
+        "title": "IP Address",
+        "type": "string",
+        "default": "192.168.0.131",
+        "required": true,
+        "format": "ipv4"
+      },
+      "auth": {
+        "title": "Shelly 3EM Web Interface Authentication",
+        "type": "object",
+        "properties": {
+          "user": {
+            "title": "Username",
+            "type": "string",
+            "default": "",
+            "required": false
+          },
+          "pass": {
+            "title": "Password",
+            "type": "string",
+            "default": "",
+            "required": false
+          }
+        }
+      },
+      "timeout": {
+        "title": "Request Timeout",
+        "type": "integer",
+        "default": 5000,
+        "required": true,
+        "minimum": 1000,
+        "maximum": 30000
+      },
+      "update_interval": {
+        "title": "Update Interval",
+        "type": "integer",
+        "default": 10000,
+        "required": true,
+        "minimum": 1000,
+        "maximum": 60000,
+        "description": "Update Interval should be higher than Request Timeout."
+      },
+      "Auto_On_Value": {
+        "title": "Watt consumption Auto ON",
+        "type": "integer",
+        "default": 20,
+        "required": true,
+        "minimum": 0,
+        "maximum": 100,
+        "description": "Consumption value in W at which the swith will be auto set to ON"
+      },
+      "negative_handling_mode": {
+        "title": "Negative Values handling mode (0=zero Negative Values,1=absolute Negative Values)",
+        "type": "integer",
+        "default": 0,
+        "required": true,
+        "minimum": 0,
+        "maximum": 1,
+        "description": "Defines how negative values are handled (power return etc.)."
+      },
+      "use_pf": {
+        "title": "Use Power Factor (pf) when calculating Total Ampere",
+        "type": "boolean",
+        "default": false,
+        "required": true
+      },
+      "debug_log": {
+        "title": "Enable Debug Logging",
+        "type": "boolean",
+        "default": false,
+        "required": true
+      },
+      "serial": {
+        "title": "Shelly 3EM Device Serial",
+        "type": "string",
+        "default": "123456789012345",
+        "required": true,
+        "minLength": 5,
+        "maxLength": 16,
+        "description": "Please make sure this serial is unique across homebridge, or simply use real serial."
+      }
+    }
+  }
+}
