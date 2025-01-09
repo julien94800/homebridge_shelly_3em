@@ -45,7 +45,7 @@ function EnergyMeter(log, config) {
 
 
 	// Create Accessory Info Service
-    const infoSubtype = "Info-" + this.serial;
+	const infoSubtype = "Info-" + this.serial;
 	this.informationService = new Service.AccessoryInformation(this.name, infoSubtype);
 	this.informationService
 		.setCharacteristic(Characteristic.Manufacturer, "Shelly - Paname")
@@ -53,16 +53,14 @@ function EnergyMeter(log, config) {
 		.setCharacteristic(Characteristic.FirmwareRevision, version)
 		.setCharacteristic(Characteristic.SerialNumber, this.serial);
 
-    // Create Outlet Service
-    const outletSubtype = "outlet-" + this.serial;
-    this.serviceSwitch = new Service.Outlet(this.name, outletSubtype);
+	// Create Outlet Service
+	const outletSubtype = "outlet-" + this.serial;
+	this.serviceSwitch = new Service.Outlet(this.name, outletSubtype);
 	this.serviceSwitch.getCharacteristic(Characteristic.On)
-      .on('set', this.setPowerState.bind(this));
+      		.on('set', this.setPowerState.bind(this));
 
 	// Create FakeGato Service
 	this.historyService = new FakeGatoHistoryService("energy", this.informationService, { storage: 'fs' });
-	//this.historyServiceENERGY = new FakeGatoHistoryService("energy", this.serviceSwitch, { storage: 'fs' });
-	//this.historyServiceENERGY.UUID = UUIDGen.generate(this.serial)
 
 	//Create custom characteristics
 	var EvePowerConsumption = function () {
@@ -95,98 +93,12 @@ function EnergyMeter(log, config) {
 	EveTotalConsumption.UUID = 'E863F10C-079E-48FF-8F27-9C2605A29F52';
 	inherits(EveTotalConsumption, Characteristic);
 
-	//var EveVoltage1 = function () {
-	//	Characteristic.call(this, 'Volt', 'E863F10A-079E-48FF-8F27-9C2605A29F52');
-	//	this.setProps({
-	//		format: Characteristic.Formats.FLOAT,
-	//		unit: 'Volt',
-	//		maxValue: 1000000000,
-	//		minValue: 0,
-	//		minStep: 0.001,
-	//		perms: [Characteristic.Perms.READ, Characteristic.Perms.NOTIFY]
-	//	});
-	//	this.value = this.getDefaultValue();
-	//};
-	//EveVoltage1.UUID = 'E863F10A-079E-48FF-8F27-9C2605A29F52';
-	//inherits(EveVoltage1, Characteristic);
-
-	//var EveAmpere1 = function () {
-	//	Characteristic.call(this, 'Ampere', 'E863F126-079E-48FF-8F27-9C2605A29F52');
-	//	this.setProps({
-	//		format: Characteristic.Formats.FLOAT,
-	//		unit: 'Ampere',
-	//		maxValue: 1000000000,
-	//		minValue: 0,
-	//		minStep: 0.001,
-	//		perms: [Characteristic.Perms.READ, Characteristic.Perms.NOTIFY]
-	//	});
-	//	this.value = this.getDefaultValue();
-	//};
-	//EveAmpere1.UUID = 'E863F126-079E-48FF-8F27-9C2605A29F52';
-	//inherits(EveAmpere1, Characteristic);
-	
-	var EveSwitch1 = function () {
-		Characteristic.call(this, 'State', '00000025-0000-1000-8000-0026BB765291');
-		this.setProps({
-			format: Characteristic.Formats.BOOL,
-			perms: [Characteristic.Perms.READ, Characteristic.Perms.NOTIFY]
-		});
-		this.value = this.getDefaultValue();
-	};
-	EveSwitch1.UUID = '00000025-0000-1000-8000-0026BB765291';
-	inherits(EveSwitch1, Characteristic);
-
-	//var PowerMeterService = function (displayName, subtype) {
-	//	Service.call(this, displayName, '00000001-0000-1777-8000-775D67EC4377', subtype);
-	//	this.addCharacteristic(EvePowerConsumption);
-	//	this.addOptionalCharacteristic(EveTotalConsumption);
-	//	this.addOptionalCharacteristic(EveVoltage1);
-	//	this.addOptionalCharacteristic(EveAmpere1);
-		//this.addOptionalCharacteristic(EveSwitch1);
-	//};
-	//PowerMeterService.UUID = '00000001-0000-1777-8000-775D67EC4377';
-	//inherits(PowerMeterService, Service);
-
 	// local vars
 	this._EvePowerConsumption = EvePowerConsumption;
 	this._EveTotalConsumption = EveTotalConsumption;
-	//this._EveVoltage1 = EveVoltage1;
-	//this._EveAmpere1 = EveAmpere1;
-	this._EveSwitch1 = EveSwitch1;
 
 	this.serviceSwitch.getCharacteristic(this._EvePowerConsumption).on('get', this.getPowerConsumption.bind(this));
 	this.serviceSwitch.addCharacteristic(this._EveTotalConsumption).on('get', this.getTotalConsumption.bind(this));
-	//this.serviceSwitch.addCharacteristic(this._EveSwitch1).on('get', this.getSwitch1.bind(this));
-	//this.serviceSwitch.addCharacteristic(this._EveVoltage1).on('get', this.getVoltage1.bind(this));
-	//this.serviceSwitch.addCharacteristic(this._EveAmpere1).on('get', this.getAmpere1.bind(this));
-
-    // Initialisation de l'accessoire
-    //this.accessory = new Accessory(this.name, PowerMeterService.UUID);
-
-
-
-    // Ajouter l'historique
-    //this.accessory.addService(this.serviceSwitch);
-
-
-
-	// construct service
-	//this.service = new PowerMeterService(this.name);
-	//this.service.getCharacteristic(this._EvePowerConsumption).on('get', this.getPowerConsumption.bind(this));
-	//this.service.addCharacteristic(this._EveTotalConsumption).on('get', this.getTotalConsumption.bind(this));
-	//this.service.addCharacteristic(this._EveVoltage1).on('get', this.getVoltage1.bind(this));
-	//this.service.addCharacteristic(this._EveAmpere1).on('get', this.getAmpere1.bind(this));
-	//this.service.addCharacteristic(this._EveSwitch1).on('get', this.getSwitch1.bind(this));
-	
-	//this.accessory.addService(this.service);
-
-
-	//this.historyServiceSwitch = new FakeGatoHistoryService("switch", this.serviceSwitch, { storage: 'fs' });
-	//this.log.info(this.serviceSwitch);
-	//this.log.info(this.informationService);
-	//this.log.info(this.historyService);
-	//this.log.info(this.historyServiceENERGY);
-	//this.log.info(this.accessory);
 }
 
 EnergyMeter.prototype.updateState = function () {
@@ -283,12 +195,6 @@ EnergyMeter.prototype.updateState = function () {
 			if (value_total != null) {
 				this.service.getCharacteristic(this._EveTotalConsumption).setValue(value_total, undefined, undefined);
 			}
-//			if (value_voltage1 != null) {
-//				this.service.getCharacteristic(this._EveVoltage1).setValue(value_voltage1, undefined, undefined);
-//			}
-//			if (value_ampere1 != null) {
-//				this.service.getCharacteristic(this._EveAmpere1).setValue(value_ampere1, undefined, undefined);
-//			}
 			if (this.powerConsumption > this.auto_on_Watt) {  // Si la consommation dépasse 20 kW
 				if (this.serviceSwitch.getCharacteristic(Characteristic.On).value===false) {
 					this.log.info("Switching switch to ON cause consumption = " + this.powerConsumption + " and prev state was " + this.serviceSwitch.getCharacteristic(Characteristic.On).value);
@@ -315,14 +221,6 @@ EnergyMeter.prototype.getPowerConsumption = function (callback) {
 
 EnergyMeter.prototype.getTotalConsumption = function (callback) {
 	callback(null, this.totalPowerConsumption);
-};
-
-EnergyMeter.prototype.getVoltage1 = function (callback) {
-	callback(null, this.voltage1);
-};
-
-EnergyMeter.prototype.getAmpere1 = function (callback) {
-	callback(null, this.ampere1);
 };
 
 EnergyMeter.prototype.getSwitch1 = function (callback) {
