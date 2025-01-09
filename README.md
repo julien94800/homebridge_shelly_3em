@@ -57,4 +57,3 @@ and then edit your Homebridge's config.json to include the following in the acce
 Shelly EM functionality is beta, please use at own risk as I could not test it on a real EM device.
 The creator of this plugin is not affiliated in any way with [Shelly(Allterco)](https://shelly.cloud/) or [EVE](https://www.evehome.com/).
 
-[![Support via PayPal](https://cdn.rawgit.com/twolfson/paypal-github-button/1.0.0/dist/button.svg)](https://www.paypal.me/produdegr/)
