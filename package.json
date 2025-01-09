@@ -1,0 +1,29 @@
+{
+  "name": "homebridge_shelly_3em",
+  "version": "1.0.0",
+  "description": "Homebridge plugin for implementing Shelly 3EM in Homekit as a switch with power consumption monitoring (in EVE app). The switch will be auto ON when consuming more than a certain value (customisable)",
+  "license": "MIT",
+  "keywords": [
+    "homebridge-plugin",
+    "energy meter",
+    "Shelly 3EM",
+    "Shelly EM",
+    "http",
+    "no mqtt"
+  ],
+  "engines": {
+    "node": ">=10.0.0",
+    "homebridge": ">=1.3.1"
+  },
+  "author": {
+    "name": "@julien94800"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/julien94800/homebridge_shelly_3em.git"
+  },
+  "dependencies": {
+    "request": "^2.5.0",
+    "fakegato-history": "^0.6.1" 
+  }
+}
